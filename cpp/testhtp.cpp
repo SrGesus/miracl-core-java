@@ -284,7 +284,7 @@ int htp_NIST256(char *mess)
 
 
 /* https://datatracker.ietf.org/doc/draft-irtf-cfrg-hash-to-curve/ */
-static void hash_to_field_Ed448(int hash,int hlen,Ed448::FP *u,octet *DST,octet *M, int ctr)
+static void hash_to_field_Ed448(int hash,int hlen,F448::FP *u,octet *DST,octet *M, int ctr)
 {
     using namespace Ed448;
     using namespace Ed448_BIG;

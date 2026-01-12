@@ -346,7 +346,7 @@ int htp_NIST256(char *mess)
 
 
 /* https://datatracker.ietf.org/doc/draft-irtf-cfrg-hash-to-curve/ */
-static void hash_to_field_Ed448(int hash,int hlen,FP_Ed448 *u,octet *DST,octet *M, int ctr)
+static void hash_to_field_Ed448(int hash,int hlen,FP_F448 *u,octet *DST,octet *M, int ctr)
 {
 
     int i,j,L,k,m;
@@ -355,7 +355,7 @@ static void hash_to_field_Ed448(int hash,int hlen,FP_Ed448 *u,octet *DST,octet *
     char okm[512],fd[256];
     octet OKM = {0,sizeof(okm),okm};
 
-    BIG_GL_rcopy(q, Modulus_Ed448);
+    BIG_GL_rcopy(q, Modulus_F448);
     k=BIG_GL_nbits(q);
     BIG_GL_rcopy(r, CURVE_Order_Ed448);
     m=BIG_GL_nbits(r);
@@ -368,7 +368,7 @@ static void hash_to_field_Ed448(int hash,int hlen,FP_Ed448 *u,octet *DST,octet *
         
         BIG_GL_dfromBytesLen(dx,fd,L);
         BIG_GL_dmod(w,dx,q);
-        FP_Ed448_nres(&u[i],w);
+        FP_F448_nres(&u[i],w);
     }
 }
 
@@ -377,7 +377,7 @@ int htp_Ed448(char *mess)
  
     int res=0;
     BIG_GL r;
-    FP_Ed448 u[2];
+    FP_F448 u[2];
     ECP_Ed448 P,P1;
     char dst[100];
     char msg[2000];
@@ -390,8 +390,8 @@ int htp_Ed448(char *mess)
 
     OCT_jstring(&DST,(char *)"QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_RO_");
     hash_to_field_Ed448(MC_SHA2,HASH_TYPE_Ed448,u,&DST,&MSG,2);
-    printf("u[0]= "); FP_Ed448_output(&u[0]); printf("\n");
-    printf("u[1]= "); FP_Ed448_output(&u[1]); printf("\n");
+    printf("u[0]= "); FP_F448_output(&u[0]); printf("\n");
+    printf("u[1]= "); FP_F448_output(&u[1]); printf("\n");
     ECP_Ed448_map2point(&P,&u[0]);
     printf("Q[0]= "); ECP_Ed448_output(&P);
     ECP_Ed448_map2point(&P1,&u[1]);
@@ -408,7 +408,7 @@ int htp_Ed448(char *mess)
     OCT_clear(&DST);
     OCT_jstring(&DST,(char *)"QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_NU_");
     hash_to_field_Ed448(MC_SHA2,HASH_TYPE_Ed448,u,&DST,&MSG,1);
-    printf("u[0]= "); FP_Ed448_output(&u[0]); printf("\n");
+    printf("u[0]= "); FP_F448_output(&u[0]); printf("\n");
     ECP_Ed448_map2point(&P,&u[0]);
     printf("Q= "); ECP_Ed448_output(&P);
     ECP_Ed448_cfp(&P);

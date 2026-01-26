@@ -31,30 +31,16 @@
 #define ECDH_ZZZ_H
 
 #include "ecp_ZZZ.h"
-//#include "ecdh_support.h"
 
 using namespace core;
-
-
-/*** START OF USER CONFIGURABLE SECTION -  ***/
-
-/*** START OF USER CONFIGURABLE SECTION -  ***/
-
-
-/*** END OF USER CONFIGURABLE SECTION ***/
 
 #define EGS_ZZZ MODBYTES_XXX  /**< ECC Group Size in bytes */
 #define EFS_ZZZ MODBYTES_XXX  /**< ECC Field Size in bytes */
 
 #define ECDH_OK                     0     /**< Function completed without error */
-/*#define ECDH_DOMAIN_ERROR          -1*/
 #define ECDH_INVALID_PUBLIC_KEY    -2	/**< Public Key is Invalid */
 #define ECDH_ERROR                 -3	/**< ECDH Internal Error */
-//#define ECDH_INVALID               -4	/**< ECDH Internal Error */
-/*#define ECDH_DOMAIN_NOT_FOUND      -5
-#define ECDH_OUT_OF_MEMORY         -6
-#define ECDH_DIV_BY_ZERO           -7
-#define ECDH_BAD_ASSUMPTION        -8*/
+
 
 
 namespace ZZZ {
